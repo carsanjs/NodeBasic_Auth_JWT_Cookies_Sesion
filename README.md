@@ -30,3 +30,4 @@ agregamo la dependencia de eslintConfig en el package.json
 > pnpm install bcrypt [link:] (https://www.npmjs.com/package/bcrypt)
 > pnpm install db-local [link:](https://www.npmjs.com/package/db-local)
 
+para generar el id aleatorio utilizamos el crypto
