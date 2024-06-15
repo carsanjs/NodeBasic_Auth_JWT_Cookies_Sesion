@@ -23,7 +23,10 @@ donde agregamos datos como
 
 #### dependencias a intalar.
 > pnpm install express
+
 > pnpm install standard -D (-D dependencia de desarrollo) //limpia nuestro codigo, incluso lo formatea
+agregamo la dependencia de eslintConfig en el package.json
+
 > pnpm install bcrypt
 > pnpm install db-local
 
