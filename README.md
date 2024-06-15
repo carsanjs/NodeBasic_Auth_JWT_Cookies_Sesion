@@ -27,6 +27,6 @@ donde agregamos datos como
 > pnpm install standard -D (-D dependencia de desarrollo) //limpia nuestro codigo, incluso lo formatea
 agregamo la dependencia de eslintConfig en el package.json
 
-> pnpm install bcrypt
-> pnpm install db-local
+> pnpm install bcrypt [link:] (https://www.npmjs.com/package/bcrypt)
+> pnpm install db-local [link:](https://www.npmjs.com/package/db-local)
 
