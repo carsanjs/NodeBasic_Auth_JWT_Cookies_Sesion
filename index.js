@@ -1,17 +1,28 @@
 import express from 'express'
 import { PORT } from './config.js'
+import { UseRepository } from './userRepository.js'
+
 const app = express()
+
+app.use(express.json())
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.get('/register', (req, res) => {
+app.post('/register', async (req, res) => {
+  res.send('bienvenido a register')
   const { username, password } = req.body
-  res.send('Hello World!')
+  try {
+    const user = await UseRepository.create(username, password)
+    res.send({ user })
+    console.log(user)
+  } catch (error) {
+    res.status(400).send('Error creating')
+  }
 })
 
-app.get('/login', (req, res) => {
+app.post('/login', (req, res) => {
   res.send('Hello World!')
 })
 

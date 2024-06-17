@@ -2,7 +2,7 @@ import DBLocal from 'db-local'
 import bcrypt from 'bcrypt'
 import { SALTROUNDS } from './config.js'
 import crypto from 'crypto'
-const { Schema } = new DBLocal({ path: './database/db-local' })
+const { Schema } = new DBLocal({ path: './db' })
 
 const User = Schema('User', {
   _id: { type: String, required: true },
@@ -50,8 +50,8 @@ class Validaciones {
   }
 
   static password ({ password }) {
-    if (typeof password !== 'string') throw new Error('Username must be')
-    if (password.length < 3) throw new Error('Username must be at least 3 characters')
+    if (typeof password !== 'string') throw new Error('Password must be')
+    if (password.length < 3) throw new Error('Password must be at least 3 characters')
   }
 
   static correo ({ correo }) {
