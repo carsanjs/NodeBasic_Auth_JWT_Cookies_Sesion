@@ -15,9 +15,16 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
+app.get('/register', (resquet, response) => {
+  response.render('register')
+})
+
+app.get('/login', (resquet, response) => {
+  response.render('login')
+})
+
 app.post('/register', async (req, res) => {
   const { username, password } = req.body
-  res.render('auth/register')
   res.send('Welcome')
   try {
     const id = await UseRepository.create({ username, password })
@@ -33,6 +40,7 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body
+  res.render('register')
   console.log('username ->', username + ' password ->', password)
   try {
     const user = await UseRepository.login({ username, password })
