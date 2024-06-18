@@ -8,6 +8,7 @@ const app = express()
 app.use(express.json())
 
 app.get('/', (req, res) => {
+  res.render('example', { username: 'carsacam' })
   res.send('Hello World!')
 })
 
