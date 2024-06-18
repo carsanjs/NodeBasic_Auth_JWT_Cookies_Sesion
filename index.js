@@ -11,11 +11,11 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.post('/register', (req, res) => {
+app.post('/register', async (req, res) => {
   const { username, password, id } = req.body
   console.log('username ->', username + ' password ->', password + ' id ->', id)
   try {
-    const id = UseRepository.create({ username, password })
+    const id = await UseRepository.create({ username, password })
     res.send({ id })
     res.send('Register Successfully')
     console.log(id)
@@ -26,8 +26,15 @@ app.post('/register', (req, res) => {
   }
 })
 
-app.post('/login', (req, res) => {
-  res.send('Hello World!')
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body
+  console.log('username ->', username + ' password ->', password)
+  try {
+    const user = await UseRepository.login({ username, password })
+    res.send({ user })
+  } catch (error) {
+    res.status(401).send(error.message) // 401 sin autorization
+  }
 })
 
 app.get('/logout', (req, res) => {
