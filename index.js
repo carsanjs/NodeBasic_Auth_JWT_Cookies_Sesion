@@ -4,25 +4,27 @@ import { UseRepository } from './userRepository.js'
 
 const app = express()
 
-app.set('view engine', 'ejs')
+app.use(express.static('public')) // Servir archivos estáticos desde la carpeta "public"
+
+app.set('view engine', 'ejs') // motor de vistas EJS
 
 // middleware, funcion que se ejecuta antes que llegue a la peticiones pasa la peticion por ahi, los trata
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.render('example', { username: 'carsacam' })
+  res.render('index')
 })
 
 app.post('/register', async (req, res) => {
-  const { username, password, id } = req.body
-  console.log('username ->', username + ' password ->', password + ' id ->', id)
+  res.render('register')
+  const { username, password } = req.body
   try {
     const id = await UseRepository.create({ username, password })
     res.send({ id })
     res.send('Register Successfully')
     console.log(id)
   } catch (error) {
-    // no es buena ide mandar el error del userRepository
+    // no es buena idea mandar el error del userRepository
     console.log('error catch' + error)
     res.status(400).send(error.message)
   }
