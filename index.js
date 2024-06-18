@@ -4,12 +4,13 @@ import { UseRepository } from './userRepository.js'
 
 const app = express()
 
+app.set('view engine', 'ejs')
+
 // middleware, funcion que se ejecuta antes que llegue a la peticiones pasa la peticion por ahi, los trata
 app.use(express.json())
 
 app.get('/', (req, res) => {
   res.render('example', { username: 'carsacam' })
-  res.send('Hello World!')
 })
 
 app.post('/register', async (req, res) => {
