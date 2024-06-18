@@ -16,8 +16,9 @@ app.get('/', (req, res) => {
 })
 
 app.post('/register', async (req, res) => {
-  res.render('register')
   const { username, password } = req.body
+  res.render('auth/register')
+  res.send('Welcome')
   try {
     const id = await UseRepository.create({ username, password })
     res.send({ id })
