@@ -1,22 +1,23 @@
 import DBLocal from 'db-local'
-import bcrypt from 'bcrypt'
-import { SALTROUNDS } from './config.js'
+// import bcrypt from 'bcrypt'
+// import { SALTROUNDS } from './config.js'
 import crypto from 'crypto'
+
 const { Schema } = new DBLocal({ path: './db' })
 
 const User = Schema('User', {
   _id: { type: String, required: true },
   username: { type: String, required: true },
-  password: { type: String, required: true },
-  correo: { type: String, required: true },
-  edad: { type: String },
-  fechaNacimiento: { type: String }
+  password: { type: String, required: true }
+  // correo: { type: String, required: true },
+  // edad: { type: String },
+  // fechaNacimiento: { type: String }
 })
 export class UseRepository {
-  static async create ({ username, password }) {
+  static create ({ username, password }) {
     // 1.validamos campos
-    Validaciones.username(username)
-    Validaciones.password(password)
+    Validaciones.username({ username })
+    Validaciones.password({ password })
 
     // 2. validamos que no se repita el username
     const user = User.findOne({ username })
@@ -24,16 +25,17 @@ export class UseRepository {
 
     // generamos el id del username
     const id = crypto.randomUUID()
-
+    console.log('id' + id)
     // 3. antes de crear el username haseamos la password
-    const hashepassword = await bcrypt.hash(user.password, SALTROUNDS)
+    // const hashepassword = await bcrypt.hash(user.password, SALTROUNDS)
 
     // 4. creamos el usuario
     User.create({
       _id: id,
       username,
-      password: hashepassword
+      password
     }).save()
+
     return id
   }
 
@@ -45,13 +47,13 @@ export class UseRepository {
 class Validaciones {
   // en las validaciones las puedes usar con (zod)
   static username ({ username }) {
-    if (typeof username !== 'string') throw new Error('Username must be')
+    if (typeof username !== 'string') throw new Error('Username is not a string')
     if (username.length < 3) throw new Error('Username must be at least 3 characters')
   }
 
   static password ({ password }) {
     if (typeof password !== 'string') throw new Error('Password must be')
-    if (password.length < 3) throw new Error('Password must be at least 3 characters')
+    if (password.length < 6) throw new Error('Password must be at least 6 characters')
   }
 
   static correo ({ correo }) {
