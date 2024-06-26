@@ -17,26 +17,33 @@
               twitter accunt. Or your regular user login.
             </p>
           </div>
-
-          <div>
+          <!-- <div>
             <a href="#" class="btn-face"
               ><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a
             >
             <a href="#" class="btn-twitter"
               ><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a
             >
-          </div>
+          </div> -->
 
           <div class="or"><span>OR</span></div>
 
-          <form action="">
-            <input type="text" placeholder="Username" />
-            <input type="text" placeholder="Email Address" />
-            <input type="password" placeholder="Password" />
-            <input type="password" placeholder="Repeat Password" />
+          <form action="" id="registerForm">
+            <input type="text" placeholder="Username" id="username"
+            autocomplete="on" />
+            <input type="email" placeholder="Email Address" id="email" 
+            autocomplete="off"/>
+            <input type="password" placeholder="Password" id="password"
+            autocomplete="off" />
+            <input
+            autocomplete="off"
+              type="password"
+              placeholder="Repeat Password"
+              id="repeatpassword"
+            />
 
-            <a href="#" class="btn-signin">Sign Up</a>
-            <a href="javascript:void(0)" class="btn-login btn-fade"
+            <button type="submit" class="btn-signin">Sign Up</button>
+            <a href="/login" class="btn-login btn-fade"
               >Already have an account, Sign In
               <i class="fa fa-long-arrow-right" aria-hidden="true"></i
             ></a>
@@ -45,4 +52,97 @@
       </div>
     </div>
   </body>
+
+  <script src="/jquery/dist/jquery.min.js"></script>
+  <!-- <script type="application/javascript" src="/register.js"></script> -->
+  <!-- 
+  <script>
+    $(document).ready( () => {
+     $('#registerForm').on('submit', e =>{
+      e.preventDefault()
+      let username = $('#username').val()
+      let password = $('#password').val()
+      let repeatpassword = $('#repeatpassword').val()
+      const errors = $('#errors')
+
+      if (password !== repeatpassword){
+        throw new Error('Please enter a password')
+        alert("Passwords do not match");
+        return;
+      }
+     
+      $.ajax({
+        url: '/register',
+        method: 'POST',
+        body: JSON.stringify({
+          username,
+          password
+        }),
+        headers: { 
+          'Content-Type' : 'application/json'
+        },
+        success: (body) => {
+          if(body.status === '200') {alert ('Registration Success'); window.location.href = '/login'; console.log(body)}
+          else alert ('Registration Failure'); return
+        
+        },
+        error: (error) => {
+          console.error('error', error)
+          alert('an error occurred during registration')
+        }
+      })
+      
+     })
+    })
+
+    // registerForm?.addEventListener("submit", (e) => {
+    //   e.preventDefault();
+    //   const username = $("#username").value;
+    //   console.log('typing username... : ' + username);
+    //   const password = $("#password").value;
+    //   console.log('typing password... : ' + password);
+    //   const repeatpassword = $("#repeatpassword").value;
+    //   const error = $("#error-message");
+
+    //   if (password !== repeatpassword) {
+    //     alert("password do not match");
+    //     return;
+    //   }
+
+    //   fetch("/register", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       username,
+    //       password,
+    //     }),
+    //   }).then((res) => {
+    //     if (res.status === 200) {
+    //       loginSpan.innerText = "Sesion iniciada... Entrando...";
+    //       loginSpan.style.color = "green";
+    //       setTimeout(() => {
+    //         window.location.href = "/protected";
+    //       }, 2000);
+    //     } else {
+    //       loginSpan.innerText = "error el iniciar sesion";
+    //       loginSpan.style.color = "red";
+    //     }
+    //   });
+    // });
+
+    logoutButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      fetch("/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        console.log(res.json());
+        window.location.href = "/";
+      });
+    });
+  </script> -->
 </html>

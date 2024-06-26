@@ -5,6 +5,7 @@ import { UseRepository } from './userRepository.js'
 const app = express()
 
 app.use(express.static('public')) // Servir archivos estáticos desde la carpeta "public"
+app.use(express.static('node_modules')) // Servir archivos estáticos desde la carpeta "js"
 
 app.set('view engine', 'ejs') // motor de vistas EJS
 
@@ -25,7 +26,6 @@ app.get('/login', (resquet, response) => {
 
 app.post('/register', async (req, res) => {
   const { username, password } = req.body
-  res.send('Welcome')
   try {
     const id = await UseRepository.create({ username, password })
     res.send({ id })
@@ -34,19 +34,22 @@ app.post('/register', async (req, res) => {
   } catch (error) {
     // no es buena idea mandar el error del userRepository
     console.log('error catch' + error)
-    res.status(400).send(error.message)
+    res.status(400).send(error)
   }
 })
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body
-  res.render('register')
-  console.log('username ->', username + ' password ->', password)
+  console.log('usernamex ->', username + ' passwordx ->', password)
   try {
     const user = await UseRepository.login({ username, password })
     res.send({ user })
+    res.send('Login Successfully')
   } catch (error) {
-    res.status(401).send(error.message) // 401 sin autorization
+    res.status(401).send('Unauthorized: Incorrect username or password')
+    // res.send('error de login ', error)
+    // console.error('error login', error)
+    // res.status(401).json({ status: '401', message: 'faield login' }) // 401 sin autorization
   }
 })
 

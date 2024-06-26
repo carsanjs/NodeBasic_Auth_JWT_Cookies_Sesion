@@ -10,10 +10,13 @@ body {
     margin: 0;
 }
 
+.dbl1{
+    display: block; 
+}
 .wrapper {
     width: 1%;
     height: 100vh;
-    background: red;
+    background: #f5f5f7;
     display: table-cell;
     vertical-align: middle;
     font-family: 'Dosis', sans-serif;

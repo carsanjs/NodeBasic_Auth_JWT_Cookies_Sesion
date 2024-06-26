@@ -28,12 +28,17 @@ donde agregamos datos como
 agregamo la dependencia de eslintConfig en el package.json
 
 > pnpm install bcrypt [link:] (https://www.npmjs.com/package/bcrypt)
-> pnpm install db-local [link:](https://www.npmjs.com/package/db-local)
+> pnpm install db-local [link:] (https://www.npmjs.com/package/db-local)
 
 para generar el **id** leatorio utilizamos el modulo +*crypto de node.js*+, el cual nos proporciona una amplia gama de funciones para trabajar con criptografia 
 
 ### Utilizacion de sistema de plantilla (EJS)
 agregar en la **app** app.set('view engine', 'ejs'); // hay diferentes, pero este es uno de ello.
 
-intalamos la dependencia
+instalamos la dependencia de plantilla (EJS)
 > pnpm install ejs
+
+
+instalamos jquery
+> pnpm i jquery [link:] (https://www.npmjs.com/package/jquery)
+
